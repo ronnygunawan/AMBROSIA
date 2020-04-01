@@ -78,13 +78,17 @@ jlog=`mktemp job.XXXX.log`
 echo
 echo "PTI: Launching Server:"
 set -x
-AMBROSIA_INSTANCE_NAME=$SERVERNAME AMBROSIA_IMMORTALCOORDINATOR_PORT=$CRAPORT1 \
-COORDTAG=coordserv AMBROSIA_IMMORTALCOORDINATOR_LOG=$slog \
+
+# Set environment vars
+AMBROSIA_INSTANCE_NAME=$SERVERNAME 
+AMBROSIA_IMMORTALCOORDINATOR_PORT=$CRAPORT1 
+COORDTAG=coordserv 
+AMBROSIA_IMMORTALCOORDINATOR_LOG=$slog
   
   # ####*#*#*#  Removed Server
   echo "&&&&&&&&&&&&&&&&&&&&&1 LAUNCH SERVER CALL &&&&&&&&&&&&&&"
-  # Orig runAmbrosiaService.sh ./Server/publish/Server --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
-  runAmbrosiaService.sh ./Server/publish --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
+  runAmbrosiaService.sh ./Server/publish/Server --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
+  # fixed? runAmbrosiaService.sh ./Server/publish --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
 
 
 set +x
