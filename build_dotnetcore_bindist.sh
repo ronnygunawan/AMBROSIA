@@ -19,6 +19,7 @@ if [ $AMBROSIA_DOTNET_FRAMEWORK == "net46" ]; then
     PLAT=x64
     OS=Windows_NT
 else
+    echo "&&&&&&&& Figure out Platform for x64"
     # netcore gives an error on Ambrosia.csproj with x64...
     if [ "$UNAME" == Linux ];
     then PLAT=linux-x64
@@ -27,6 +28,7 @@ else
     else PLAT=win10-x64
          OS=Windows_NT
     fi
+    echo "&&&&& P $PLAT"
 fi
 
 OUTDIR=`pwd`/bin
