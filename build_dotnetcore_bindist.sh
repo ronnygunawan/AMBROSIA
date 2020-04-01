@@ -14,6 +14,8 @@ export AMBROSIA_DOTNET_FRAMEWORK="${AMBROSIA_DOTNET_FRAMEWORK:-netcoreapp3.1}"
 # Release or Debug:
 export AMBROSIA_DOTNET_CONF="${AMBROSIA_DOTNET_CONF:-Release}"
 
+    echo "&&&&& net46 or Core &&&"
+
 UNAME=`uname`
 if [ $AMBROSIA_DOTNET_FRAMEWORK == "net46" ]; then
     PLAT=x64
