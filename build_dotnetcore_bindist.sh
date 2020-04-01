@@ -18,7 +18,8 @@ export AMBROSIA_DOTNET_CONF="${AMBROSIA_DOTNET_CONF:-Release}"
 
 UNAME=`uname`
 if [ $AMBROSIA_DOTNET_FRAMEWORK == "net46" ]; then
-    PLAT=x64
+    #PLAT=x64
+    PLAT=win10-x64
     OS=Windows_NT
 else
     echo "&&&&&&&& Figure out Platform for x64"
