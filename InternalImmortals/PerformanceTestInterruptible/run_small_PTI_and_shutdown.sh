@@ -62,7 +62,11 @@ echo "  Instance: names $CLIENTNAME, $SERVERNAME"
 echo "--------------------------------------------------------------------------------"
 echo
 
+     echo "&&&&&&&&&&&&&&&&&&&&& 0 SKIP_REGISTER &&&&&&&&&&&&&&"$SKIP_REGISTER
+
 if ! [ ${SKIP_REGISTER:+defined} ]; then
+     echo "&&&&&&&&&&&&&&&&&&&&&0 a Timer &&&&&&&&&&&&&&"
+
     set -x
     time Ambrosia RegisterInstance -i $CLIENTNAME --rp $PORT1 --sp $PORT2 -l "./ambrosia_logs/" 
     time Ambrosia RegisterInstance -i $SERVERNAME --rp $PORT3 --sp $PORT4 -l "./ambrosia_logs/"
@@ -81,8 +85,8 @@ COORDTAG=coordserv AMBROSIA_IMMORTALCOORDINATOR_LOG=$slog \
   
   # ####*#*#*#  Removed Server
   echo "&&&&&&&&&&&&&&&&&&&&&1 LAUNCH SERVER CALL &&&&&&&&&&&&&&"
-  runAmbrosiaService.sh ./Server/publish/Server --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
-  # Fixed? runAmbrosiaService.sh ./Server/publish --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
+  # Orig runAmbrosiaService.sh ./Server/publish/Server --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
+  runAmbrosiaService.sh ./Server/publish --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
 
 
 set +x

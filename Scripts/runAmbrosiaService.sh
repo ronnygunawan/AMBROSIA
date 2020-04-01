@@ -48,6 +48,12 @@ function print_usage() {
     exit 1
 }
 
+# Print out what it thinks is there
+    echo "&&&&&& AMBROSIA_INSTANCE_NAME: "$AMBROSIA_INSTANCE_NAME 
+    echo "&&&&&& AMBROSIA_SILENT_COORDINATOR: "$AMBROSIA_SILENT_COORDINATOR 
+    echo "&&&&&& AMBROSIA_IMMORTALCOORDINATOR_PORT: "$AMBROSIA_IMMORTALCOORDINATOR_PORT 
+    echo "&&&&&& AMBROSIA_IMMORTALCOORDINATOR_LOG: "$AMBROSIA_IMMORTALCOORDINATOR_PORT 
+
 while [ $# -ge 1 ]; do
     case $1 in
         --silent-coord) shift; AMBROSIA_SILENT_COORDINATOR=1 ;;
@@ -60,6 +66,7 @@ if [ $# -eq 0 ]; then print_usage; fi
 # Don't let this fail, it's just informative:
 APPNAME=`basename $1` || APPNAME="$1"
 
+echo "&&&&& Check Amb Ins Name &&&&"
 if ! [[ ${AMBROSIA_INSTANCE_NAME:+defined} ]]; then
     echo "ERROR $TAG: unbound environment variable: AMBROSIA_INSTANCE_NAME"
     echo 
