@@ -12,26 +12,36 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 # ----------------------------------------
 
 # Publish to a local directory:
+RUN echo "&&&&&&&&&&&&&0 ${PATH}:/ambrosia/InternalImmortals/PerformanceTestInterruptible/Client/publish:/ambrosia/InternalImmortals/PerformanceTestInterruptible/Server/publish"
 ENV PATH="${PATH}:/ambrosia/InternalImmortals/PerformanceTestInterruptible/Client/publish:/ambrosia/InternalImmortals/PerformanceTestInterruptible/Server/publish"
 
 # ------------------------------------------------------------
 
 # This Dockerfile is an example of adding the application
 # *piece-by-piece* to enable incremental rebuilds.
+RUN echo "&&&&&&&&&&&&&1 IJob /ambrosia/InternalImmortals/PerformanceTestInterruptible/IJob"
 ADD IJob /ambrosia/InternalImmortals/PerformanceTestInterruptible/IJob
+
+RUN echo "&&&&&&&&&&&&&15 WORKDIR /ambrosia/InternalImmortals/PerformanceTestInterruptible"
 WORKDIR /ambrosia/InternalImmortals/PerformanceTestInterruptible
+RUN echo "&&&&&&&&&&&&&2 dotnet publish -o publish $BLDFLAGS IJob/IJob.csproj"
 RUN dotnet publish -o publish $BLDFLAGS IJob/IJob.csproj
 
+
 # DANGER, WARNING, FIXME: it is UNSAFE to dotnet publish twice to the same absolute path:
+RUN echo "&&&&&&&&&&&&&25 API /ambrosia/InternalImmortals/PerformanceTestInterruptible/API"
 ADD API /ambrosia/InternalImmortals/PerformanceTestInterruptible/API
+RUN echo "&&&&&&&&&&&&&3 dotnet publish -o publish $BLDFLAGS API/ServerAPI.csproj"
 RUN dotnet publish -o publish $BLDFLAGS API/ServerAPI.csproj
 
 # Run the code-generation tool:
-RUN rm -rf ./GeneratedSourceFiles && \
-    mkdir -p GeneratedSourceFiles 
-#RUN AmbrosiaCS CodeGen -a IJob/publish/IJob.dll -a API/publish/ServerAPI.dll -p IJob/IJob.csproj -p API/ServerAPI.csproj -o PTIAmbrosiaGeneratedAPI -f netcoreapp3.1 -f net46
-#*#*#*# Test This
-RUN AmbrosiaCS CodeGen -a /IJob/bin/Release/netcoreapp3.1/linux-x64/IJob.dll -a API/bin/Release/netcoreapp3.1/linux-x64/ServerAPI.dll -p IJob/IJob.csproj -p API/ServerAPI.csproj -o PTIAmbrosiaGeneratedAPI -f netcoreapp3.1 -f net46
+RUN echo "&&&&&&&&&&&&&4 rm -rf ./GeneratedSourceFiles && mkdir -p GeneratedSourceFiles "
+RUN rm -rf ./GeneratedSourceFiles && mkdir -p GeneratedSourceFiles 
+
+RUN echo "&&&&&&&&&&&&&5 AmbrosiaCS CodeGen -a IJob/publish/IJob.dll -a API/publish/ServerAPI.dll -p IJob/IJob.csproj -p API/ServerAPI.csproj -o PTIAmbrosiaGeneratedAPI -f netcoreapp3.1 -f net46"
+RUN AmbrosiaCS CodeGen -a IJob/publish/IJob.dll -a API/publish/ServerAPI.dll -p IJob/IJob.csproj -p API/ServerAPI.csproj -o PTIAmbrosiaGeneratedAPI -f netcoreapp3.1 -f net46
+#*#*#*# Test statement
+#RUN AmbrosiaCS CodeGen -a /IJob/bin/Release/netcoreapp3.1/linux-x64/IJob.dll -a API/bin/Release/netcoreapp3.1/linux-x64/ServerAPI.dll -p IJob/IJob.csproj -p API/ServerAPI.csproj -o PTIAmbrosiaGeneratedAPI -f netcoreapp3.1 -f net46
 #*#*#*#
 
 
