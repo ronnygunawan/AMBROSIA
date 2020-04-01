@@ -63,8 +63,6 @@ echo "--------------------------------------------------------------------------
 echo
 
 if ! [ ${SKIP_REGISTER:+defined} ]; then
-     echo "&&&&&&&&&&&&&&&&&&&&&0 a Timer &&&&&&&&&&&&&&"
-
     set -x
     time Ambrosia RegisterInstance -i $CLIENTNAME --rp $PORT1 --sp $PORT2 -l "./ambrosia_logs/" 
     time Ambrosia RegisterInstance -i $SERVERNAME --rp $PORT3 --sp $PORT4 -l "./ambrosia_logs/"
@@ -85,16 +83,12 @@ AMBROSIA_IMMORTALCOORDINATOR_PORT=$CRAPORT1
 COORDTAG=coordserv 
 AMBROSIA_IMMORTALCOORDINATOR_LOG=$slog
   
-  # ####*#*#*#  Removed Server
-  echo "&&&&&&&&&&&&&&&&&&&&&1 LAUNCH SERVER CALL &&&&&&&&&&&&&&"
-  runAmbrosiaService.sh ./Server/publish/Server --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
-  # fixed? runAmbrosiaService.sh ./Server/publish --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
-
+ runAmbrosiaService.sh ./Server/publish/Server --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
 
 set +x
 pid_server=$!
 echo "Server launched as PID ${pid_server}.  Waiting a bit."
-sleep 20
+sleep 12
 
 if ! kill -0 $pid_server 2>/dev/null ; then
     echo
@@ -105,12 +99,15 @@ fi
 echo
 echo "PTI: Launching Job now:"
 set -x
-AMBROSIA_INSTANCE_NAME=$CLIENTNAME AMBROSIA_IMMORTALCOORDINATOR_PORT=$CRAPORT2 \
-COORDTAG=coordcli AMBROSIA_IMMORTALCOORDINATOR_LOG=$jlog \
-# *#*#*###*#
+
+# Set environment vars
+AMBROSIA_INSTANCE_NAME=$CLIENTNAME 
+AMBROSIA_IMMORTALCOORDINATOR_PORT=$CRAPORT2
+COORDTAG=coordcli 
+AMBROSIA_IMMORTALCOORDINATOR_LOG=$jlog 
+
   echo "&&&&&&&&&&&&&&&&&&&&&2 LAUNCH CLIENT CALL &&&&&&&&&&&&&&"
-  # runAmbrosiaService.sh ./Client/publish/Job --rp $PORT2 --sp $PORT1 -j $CLIENTNAME -s $SERVERNAME --mms 65536 -n 2 -c 
-  runAmbrosiaService.sh ./Client/publish --rp $PORT2 --sp $PORT1 -j $CLIENTNAME -s $SERVERNAME --mms 65536 -n 2 -c 
+  runAmbrosiaService.sh ./Client/publish/Job --rp $PORT2 --sp $PORT1 -j $CLIENTNAME -s $SERVERNAME --mms 65536 -n 2 -c 
 set +x
 
 echo
