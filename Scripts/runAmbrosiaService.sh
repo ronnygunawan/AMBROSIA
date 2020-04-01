@@ -48,13 +48,6 @@ function print_usage() {
     exit 1
 }
 
-# Print out what it thinks is there
-    echo "&&&&&& 0: $0"
-    echo "&&&&&& 1: $1"
-    echo "&&&&&& 2: $2"
-    echo "&&&&&& 3: $3"
-    
-    echo "&&&&&&&  Before WHILE"
 while [ $# -ge 1 ]; do
     case $1 in
         --silent-coord) shift; AMBROSIA_SILENT_COORDINATOR=1 ;;
@@ -66,6 +59,8 @@ if [ $# -eq 0 ]; then print_usage; fi
 
 # Don't let this fail, it's just informative:
 APPNAME=`basename $1` || APPNAME="$1"
+
+AMBROSIA_INSTANCE_NAME=$6
 
 echo "&&&&& Check Amb Ins Name &&&&"
 if ! [[ ${AMBROSIA_INSTANCE_NAME:+defined} ]]; then
