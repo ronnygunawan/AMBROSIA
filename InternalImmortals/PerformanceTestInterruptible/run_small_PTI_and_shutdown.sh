@@ -62,8 +62,6 @@ echo "  Instance: names $CLIENTNAME, $SERVERNAME"
 echo "--------------------------------------------------------------------------------"
 echo
 
-     echo "&&&&&&&&&&&&&&&&&&&&& 0 SKIP_REGISTER &&&&&&&&&&&&&&"$SKIP_REGISTER
-
 if ! [ ${SKIP_REGISTER:+defined} ]; then
      echo "&&&&&&&&&&&&&&&&&&&&&0 a Timer &&&&&&&&&&&&&&"
 
