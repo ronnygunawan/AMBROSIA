@@ -49,11 +49,11 @@ function print_usage() {
 }
 
 # Print out what it thinks is there
-    #echo "&&&&&& AMBROSIA_SILENT_COORDINATOR: $AMBROSIA_SILENT_COORDINATOR"
-    #echo "&&&&&& AMBROSIA_IMMORTALCOORDINATOR_PORT: $AMBROSIA_IMMORTALCOORDINATOR_PORT"
-    #echo "&&&&&& AMBROSIA_IMMORTALCOORDINATOR_LOG: $AMBROSIA_IMMORTALCOORDINATOR_PORT"
-    #echo "&&&&&& AMBROSIA_INSTANCE_NAME: $AMBROSIA_INSTANCE_NAME"
-
+    echo "&&&&&& 0: $0"
+    echo "&&&&&& 1: $1"
+    echo "&&&&&& 2: $2"
+    echo "&&&&&& 3: $3"
+    
     echo "&&&&&&&  Before WHILE"
 while [ $# -ge 1 ]; do
     case $1 in
