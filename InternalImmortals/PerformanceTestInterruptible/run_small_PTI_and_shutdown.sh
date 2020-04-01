@@ -80,9 +80,9 @@ AMBROSIA_INSTANCE_NAME=$SERVERNAME AMBROSIA_IMMORTALCOORDINATOR_PORT=$CRAPORT1 \
 COORDTAG=coordserv AMBROSIA_IMMORTALCOORDINATOR_LOG=$slog \
   
   # ####*#*#*#  Removed Server
-  echo "&&&&&&&&&&&&&&&&&&&&& LAUNCH SERVER CALL &&&&&&&&&&&&&&"
-  #runAmbrosiaService.sh ./Server/publish/Server --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
-  runAmbrosiaService.sh ./Server/publish --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
+  echo "&&&&&&&&&&&&&&&&&&&&&1 LAUNCH SERVER CALL &&&&&&&&&&&&&&"
+  runAmbrosiaService.sh ./Server/publish/Server --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
+  # Fixed? runAmbrosiaService.sh ./Server/publish --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
 
 
 set +x
@@ -102,7 +102,7 @@ set -x
 AMBROSIA_INSTANCE_NAME=$CLIENTNAME AMBROSIA_IMMORTALCOORDINATOR_PORT=$CRAPORT2 \
 COORDTAG=coordcli AMBROSIA_IMMORTALCOORDINATOR_LOG=$jlog \
 # *#*#*###*#
-  echo "&&&&&&&&&&&&&&&&&&&&& LAUNCH CLIENT CALL &&&&&&&&&&&&&&"
+  echo "&&&&&&&&&&&&&&&&&&&&&2 LAUNCH CLIENT CALL &&&&&&&&&&&&&&"
   # runAmbrosiaService.sh ./Client/publish/Job --rp $PORT2 --sp $PORT1 -j $CLIENTNAME -s $SERVERNAME --mms 65536 -n 2 -c 
   runAmbrosiaService.sh ./Client/publish --rp $PORT2 --sp $PORT1 -j $CLIENTNAME -s $SERVERNAME --mms 65536 -n 2 -c 
 set +x
