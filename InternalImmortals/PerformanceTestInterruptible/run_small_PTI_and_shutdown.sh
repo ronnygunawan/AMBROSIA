@@ -94,7 +94,7 @@ AMBROSIA_IMMORTALCOORDINATOR_LOG=$slog
 set +x
 pid_server=$!
 echo "Server launched as PID ${pid_server}.  Waiting a bit."
-sleep 12
+sleep 20
 
 if ! kill -0 $pid_server 2>/dev/null ; then
     echo
