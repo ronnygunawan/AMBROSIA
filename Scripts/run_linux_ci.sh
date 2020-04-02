@@ -42,7 +42,9 @@ case $mode in
       # Application 1: PTI
       # ----------------------------------------
 	  echo "*********  PTI ********************"
-      ./Scripts/internal/run_linux_PTI_docker.sh
+# *** Make sure to remove this comment
+# *#*#*#*       ./Scripts/internal/run_linux_PTI_docker.sh
+# *** Make sure to remove this comment
 
       # Application 2: Hello World Sample
       # ----------------------------------------
