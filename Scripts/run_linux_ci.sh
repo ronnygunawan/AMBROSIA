@@ -43,6 +43,7 @@ case $mode in
       # ----------------------------------------
 	  echo "*********  PTI ********************"
 # *** Make sure to remove this comment
+echo "&&&&& SKIPPING PTI TO TEST HELLO WORLD. DONT LEAVE LIKE THIS"
 # *#*#*#*       ./Scripts/internal/run_linux_PTI_docker.sh
 # *** Make sure to remove this comment
 
