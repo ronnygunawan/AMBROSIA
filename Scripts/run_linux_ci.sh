@@ -42,10 +42,7 @@ case $mode in
       # Application 1: PTI
       # ----------------------------------------
 	  echo "*********  PTI ********************"
-# *** Make sure to remove this comment
-echo "&&&&& SKIPPING PTI TO TEST HELLO WORLD. DONT LEAVE LIKE THIS"
-# *#*#*#*       ./Scripts/internal/run_linux_PTI_docker.sh
-# *** Make sure to remove this comment
+      ./Scripts/internal/run_linux_PTI_docker.sh
 
       # Application 2: Hello World Sample
       # ----------------------------------------
@@ -60,11 +57,6 @@ echo "&&&&& SKIPPING PTI TO TEST HELLO WORLD. DONT LEAVE LIKE THIS"
 		          || echo "Allowed failure for now."
       fi
       
-      # Application 3: NativeService
-      # ----------------------------------------
-      # docker --env AZURE_STORAGE_CONN_STRING="${AZURE_STORAGE_CONN_STRING}" --rm \
-      #    ambrosia-nativeapp ./run_test_in_one_machine.sh
-
       echo "Examine Docker image sizes:"
       docker images 
       
@@ -89,8 +81,6 @@ echo "&&&&& SKIPPING PTI TO TEST HELLO WORLD. DONT LEAVE LIKE THIS"
       # ----------------------------------------
   	  echo "*********  Hello World Sample ********************"
 	  cd "$AMBROSIA_ROOT"/Samples/HelloWorld
-      #echo "HelloWorld: First make sure a straight-to-the-solution build works:"
-      #dotnet publish -c $CONF -f $FMWK HelloWorld.sln
       echo "HelloWorld: Then make sure it builds from scratch:"
       rm -rf GeneratedSourceFiles
       git clean -nxd .
@@ -106,14 +96,7 @@ echo "&&&&& SKIPPING PTI TO TEST HELLO WORLD. DONT LEAVE LIKE THIS"
       cd "$AMBROSIA_ROOT"/Clients/C
       ./run_hello_world.sh || echo "Allowed failure for now."
 
-      # Test Application: Hello World Sample
-      # ----------------------------------------
-      # cd "$AMBROSIA_ROOT"/Samples/HelloWorld
-      # ./build_dotnetcore.sh
-      # # Expects stdin, so we pipe 'yes' to it:
-      # yes | ./run_helloworld_both.sh || echo "Allowed failure for now."
-      
-  
+ 
       # Test Application: PTI (last because it's slow)
       # ----------------------------------------------
 	  echo "********* Test App PTI ********************"
@@ -124,7 +107,6 @@ echo "&&&&& SKIPPING PTI TO TEST HELLO WORLD. DONT LEAVE LIKE THIS"
 	  sleep 10
     	  
       ;;
-	 	  
 	  
 
   *)
