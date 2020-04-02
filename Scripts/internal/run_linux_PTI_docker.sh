@@ -75,7 +75,6 @@ case $PTI_MODE in
     echo "Running PTI server/client both inside ONE container:"
     set -x
 
-    echo "&&&&&&&1  " ${OPTS}
     $DOCKER run --rm ${OPTS} ambrosia/ambrosia-perftest ./run_small_PTI_and_shutdown.sh $INSTPREF
     set +x
     ;;
