@@ -60,11 +60,12 @@ if [ $# -eq 0 ]; then print_usage; fi
 # Don't let this fail, it's just informative:
 APPNAME=`basename $1` || APPNAME="$1"
 
-AMBROSIA_INSTANCE_NAME=$6
+# --- Set environment variables from parameters
+#AMBROSIA_INSTANCE_NAME=$6
+#AMBROSIA_IMMORTALCOORDINATOR_PORT=???    --- Here is the problem.  Not sure where ImmCoord value coming from as not defined
 
-echo "&&&&& Check Amb Ins Name &&&&"
 if ! [[ ${AMBROSIA_INSTANCE_NAME:+defined} ]]; then
-    echo "&&&&& ERROR $TAG: unbound environment variable: AMBROSIA_INSTANCE_NAME"
+    echo "ERROR $TAG: unbound environment variable: AMBROSIA_INSTANCE_NAME"
     echo 
     print_usage
     exit 1
@@ -75,10 +76,15 @@ then function tag() { echo " $TAG $*"; }
 else function tag() { return; }
 fi
 
+echo "&&&&& What Imm Coord port using??"
+
 if [[ ${AMBROSIA_IMMORTALCOORDINATOR_PORT:+defined} ]];
 then
+echo "&&&&& -- defined"
     tag "Using environment var AMBROSIA_IMMORTALCOORDINATOR_PORT=$AMBROSIA_IMMORTALCOORDINATOR_PORT"
 else
+
+echo "&&&&& -- not defined"
     AMBROSIA_IMMORTALCOORDINATOR_PORT=1500
     tag "Using default AMBROSIA_IMMORTALCOORDINATOR_PORT of $AMBROSIA_IMMORTALCOORDINATOR_PORT"
 fi

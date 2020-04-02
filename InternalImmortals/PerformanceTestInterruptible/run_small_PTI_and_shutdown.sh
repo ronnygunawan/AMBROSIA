@@ -47,8 +47,6 @@ echo "****************************"
 #CLIENTNAME="${CLIENTNAME,,}"
 #SERVERNAME="${SERVERNAME,,}"
 
-
-
 if ! which Ambrosia; then
     pushd ../../bin
     PATH=$PATH:`pwd`
@@ -77,11 +75,11 @@ echo
 echo "PTI: Launching Server:"
 set -x
 
-# Set environment vars
-AMBROSIA_INSTANCE_NAME=$SERVERNAME 
-AMBROSIA_IMMORTALCOORDINATOR_PORT=$CRAPORT1 
-COORDTAG=coordserv 
-AMBROSIA_IMMORTALCOORDINATOR_LOG=$slog
+# Set environment vars and make available for other scripts
+export AMBROSIA_INSTANCE_NAME=$SERVERNAME 
+export AMBROSIA_IMMORTALCOORDINATOR_PORT=$CRAPORT1 
+export COORDTAG=coordserv 
+export AMBROSIA_IMMORTALCOORDINATOR_LOG=$slog
   
  runAmbrosiaService.sh ./Server/publish/Server --rp $PORT4 --sp $PORT3 -j $CLIENTNAME -s $SERVERNAME -n 1 -c & 
 
@@ -101,10 +99,10 @@ echo "PTI: Launching Job now:"
 set -x
 
 # Set environment vars
-AMBROSIA_INSTANCE_NAME=$CLIENTNAME 
-AMBROSIA_IMMORTALCOORDINATOR_PORT=$CRAPORT2
-COORDTAG=coordcli 
-AMBROSIA_IMMORTALCOORDINATOR_LOG=$jlog 
+export AMBROSIA_INSTANCE_NAME=$CLIENTNAME 
+export AMBROSIA_IMMORTALCOORDINATOR_PORT=$CRAPORT2
+export COORDTAG=coordcli 
+export AMBROSIA_IMMORTALCOORDINATOR_LOG=$jlog 
 
   echo "&&&&&&&&&&&&&&&&&&&&&2 LAUNCH CLIENT CALL &&&&&&&&&&&&&&"
   runAmbrosiaService.sh ./Client/publish/Job --rp $PORT2 --sp $PORT1 -j $CLIENTNAME -s $SERVERNAME --mms 65536 -n 2 -c 
